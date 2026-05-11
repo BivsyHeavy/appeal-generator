@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Appeal Generator</title>
+  <style>
+    body { font-family: Arial; background:#0f172a; color:white; text-align:center; padding:40px;}
+    textarea, input { width:80%; padding:10px; margin:10px; border-radius:8px; border:none;}
+    button { padding:12px 20px; background:#22c55e; border:none; border-radius:8px; cursor:pointer;}
+    #output { margin-top:20px; white-space:pre-wrap; background:#1e293b; padding:20px; border-radius:10px;}
+  </style>
+</head>
+<body>
+
+<h1>Free Appeal Generator</h1>
+
+<input id="username" placeholder="Username"><br>
+<input id="reason" placeholder="Ban reason"><br>
+<textarea id="story" placeholder="Explain what happened"></textarea><br>
+
+<button onclick="generate()">Generate Appeal</button>
+
+<div id="output"></div>
+
+<script>
+async function generate() {
+  const res = await fetch("http://localhost:3000/generate", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      username: document.getElementById("username").value,
+      reason: document.getElementById("reason").value,
+      story: document.getElementById("story").value
+    })
+  });
+
+  const data = await res.json();
+  document.getElementById("output").innerText = data.text;
+}
+</script>
+
+</body>
+</html>
