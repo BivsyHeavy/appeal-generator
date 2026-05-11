@@ -23,7 +23,7 @@
 
 <script>
 async function generate() {
-  const res = await fetch("https://appeal-generator.onrender.com/", {
+  const res = await fetch("https://appeal-generator.onrender.com", {
     method: "POST",
     headers: {"Content-Type":"application/json"},
     body: JSON.stringify({
